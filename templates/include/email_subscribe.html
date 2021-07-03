@@ -1,0 +1,13 @@
+{% load email_subscribe_tag %}
+{% get_email_subscribe_form as form %}
+<p>Subscribe to our newsletter and get our newest updates right on your inbox.</p>
+<form action="{% url 'email_subscribe' %}" method="post">
+    {% csrf_token %}
+    {{ form.email_subscribe }}
+    <label for="agree-{{ form.random_id }}">
+        I agree to the terms & conditions
+        <input type="checkbox" id="agree-{{ form.random_id }}" required>
+        <span class="checkmark"></span>
+    </label>
+    <button type="submit" class="site-btn">Subscribe</button>
+</form>

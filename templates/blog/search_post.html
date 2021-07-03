@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load menu_tags %}
+{% block content %}
+<section class="categories categories-grid spad">
+    <div class="categories__post">
+        <div class="container">
+            <div class="categories__grid__post">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8">
+                        {% for post in post_list %}
+                        <div class="categories__list__post__item">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="categories__post__item__pic set-bg"
+                                         data-setbg="{{ post.image.url }}">
+                                        <div class="post__meta">
+                                            <h4>{{ post.create_at|date:"d" }}</h4>
+                                            <span>{{ post.create_at|date:"M" }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="categories__post__item__text">
+                                        <span class="post__label">
+                                            {% for category in post.category.all %}
+                                                {% if not forloop.first %}
+                                                    ,
+                                                {% endif %}
+                                                {{ category }}
+                                            {% endfor %}
+                                        </span>
+                                        <h3><a href="{% url 'post_single' post.slug %}">{{ post.title }}</a></h3>
+                                        <ul class="post__widget">
+                                            <li>by <span>{{ post.author }}</span></li>
+                                            <li>{{ post.comment.count }} Comment</li>
+                                        </ul>
+                                        {{ post.mini_text|truncatewords:30 }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <h3>Тo results were found for your search "{{ request.GET|get_value_by_key:'q' }}"
+                        </h3>
+                        {% endfor %}
+                        {% if is_paginated %}
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="categories__pagination">
+                                    {% if post_list.has_previous %}
+                                    <a href="{% url 'search_post' %}?q={{request.GET|get_value_by_key:'q'}}&page={{post_list.previous_page_number}}">Prev</a>
+                                    {% endif %}
+                                    {% if post_list.count > 1 %}
+                                    {% for i in paginator.page_range %}
+                                    {% if post_list.number == i %}
+                                    <a href="{% url 'search_post' %}?q={{request.GET|get_value_by_key:'q'}}&page={{ i }}"
+                                       class="active">{{ i }}</a>
+                                    {% else %}
+                                    <a href="{% url 'search_post' %}?q={{request.GET|get_value_by_key:'q'}}&page={{ i }}">{{
+                                        i }}</a>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% if post_list.has_next %}
+                                    <a href="{% url 'search_post' %}?q={{request.GET|get_value_by_key:'q'}}&page={{post_list.next_page_number}}">Next</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        {% include 'include/sidebar.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

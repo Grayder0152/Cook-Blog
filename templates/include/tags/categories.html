@@ -1,0 +1,37 @@
+{% load mptt_tags %}
+
+{% recursetree list_category %}
+<li {% if node.slug in path %}class="active" {% endif %}>
+    <a href="{% url 'post_list' slug=node.slug %}">{{ node.name }}</a>
+    {% if node.name == 'Recipes' %}
+    <div class="header__megamenu__wrapper">
+        <div class="header__megamenu">
+            {% for post in five_last_posts %}
+            <div class="header__megamenu__item">
+                <div class="header__megamenu__item--pic set-bg" data-setbg="{{ post.image.url }}">
+                    <div class="label">
+                        {% for category in post.category.all %}
+                        {% if not forloop.first %}
+                        ,
+                        {% endif %}
+                        {{ category }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="header__megamenu__item--text">
+                    <h5>
+                        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                    </h5>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% if not node.is_leaf_node %}
+    <ul class="children dropdown__menu">
+        {{ children }}
+    </ul>
+    {% endif %}
+</li>
+{% endrecursetree %}

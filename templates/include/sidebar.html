@@ -1,0 +1,34 @@
+{% load static menu_tags about_me_tags %}
+
+<div class="sidebar__item">
+    <div class="sidebar__about__item">
+        {% get_about %}
+        <a href="{% url 'about' %}" class="primary-btn">Read more</a>
+    </div>
+
+    <div class="sidebar__follow__item">
+        <div class="sidebar__item__title">
+            <h6>Follow me</h6>
+        </div>
+        <div class="sidebar__item__follow__links">
+        {% get_social_networks %}
+        </div>
+    </div>
+    <div class="sidebar__item__banner">
+        <img src="{% static 'img/sidebar/banner.jpg' %}" alt="">
+    </div>
+    <div class="sidebar__item__categories">
+        <div class="sidebar__item__title">
+            <h6>Categories</h6>
+        </div>
+        <ul>
+            {% get_sidebar_categories %}
+        </ul>
+    </div>
+    <div class="sidebar__subscribe__item">
+        <div class="sidebar__item__title">
+            <h6>Subscribe</h6>
+        </div>
+        {% include 'include/email_subscribe.html' %}
+    </div>
+</div>

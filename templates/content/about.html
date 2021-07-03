@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="about spad">
+    <div class="container">
+        <div class="about__text">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h2>About me</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/">Home</a>
+                            <span>About</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about__pic__item__large">
+                        <img src="{{ about_content.get_images.first.image.url }}" alt="">
+                    </div>
+                    <div class="about__pic">
+                        {% for item in about_content.get_images|slice:'1:' %}
+                        <div class="about__pic__item">
+                            <img src="{{ item.image.url }}" alt="">
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about__right__text">
+                        {{ about_content.text|safe }}
+                        <div class="about__right__text__social">
+                            {% for social in about_content.social_networks.all %}
+                                <a href="{{ social.link }}">
+                                    <img src="{{ social.icon.url }}" alt="" width="15">
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

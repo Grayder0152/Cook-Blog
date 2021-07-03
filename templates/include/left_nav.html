@@ -1,0 +1,40 @@
+{% load static menu_tags about_me_tags %}
+
+<div class="humberger__menu__overlay"></div>
+<div class="humberger__menu__wrapper">
+    <div class="humberger__menu__logo">
+        <a href="/"><img src="{% static 'img/humberger/humberger-logo.png' %}" alt=""></a>
+    </div>
+    <nav class="humberger__menu__nav mobile-menu">
+        <ul>
+            <li><a href="/">Home</a></li>
+            {% get_categories request.path %}
+            <li><a href="{% url 'about' %}">About</a></li>
+        </ul>
+    </nav>
+    <div id="mobile-menu-wrap"></div>
+
+    <div class="humberger__menu__about">
+        {% get_about %}
+
+        <div class="humberger__menu__about__social sidebar__item__follow__links">
+            {% get_social_networks %}
+        </div>
+    </div>
+    <style>
+        .humberger__menu__about .sidebar__item__title h6{
+            color:#fff!important;
+            opacity: 1 !important;
+        }
+        .humberger__menu__about img {
+            min-width: 50%;
+            margin-bottom: 0;
+        }
+    </style>
+    <div class="humberger__menu__subscribe">
+        <div class="humberger__menu__title sidebar__item__title">
+            <h6>Subscribe</h6>
+        </div>
+        {% include 'include/email_subscribe.html' %}
+    </div>
+</div>
