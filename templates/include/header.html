@@ -1,4 +1,4 @@
-{% load static menu_tags about_me_tags %}
+{% load static menu_tags about_me_tags cache %}
 
 <header class="header">
     <div class="header__top">
@@ -33,6 +33,7 @@
         </div>
     </div>
     <div class="container">
+        {% cache 3600 header_logo_social %}
         <div class="row">
             <div class="col-lg-3 col-md-3">
             </div>
@@ -47,6 +48,7 @@
                 </div>
             </div>
         </div>
+        {% endcache %}
         <div class="row">
             <div class="col-lg-12">
                 {% if messages %}
@@ -59,7 +61,6 @@
                     </div>
                     {% endfor %}
                 {% endif %}
-
             </div>
         </div>
     </div>

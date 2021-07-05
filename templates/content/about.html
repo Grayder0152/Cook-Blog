@@ -17,16 +17,21 @@
             </div>
             <div class="row">
                 <div class="col-lg-6">
+                    {% for about_image in about_content.about_images.all %}
+                    {% if forloop.counter == 1 %}
                     <div class="about__pic__item__large">
-                        <img src="{{ about_content.get_images.first.image.url }}" alt="">
+                        <img src="{{ about_image.image.url }}" alt="">
                     </div>
+                    {% elif forloop.counter == 2 %}
                     <div class="about__pic">
-                        {% for item in about_content.get_images|slice:'1:' %}
+                        {% for small_image in about_content.about_images.all|slice:"1:" %}
                         <div class="about__pic__item">
-                            <img src="{{ item.image.url }}" alt="">
+                            <img src="{{ small_image.image.url }}" alt="">
                         </div>
                         {% endfor %}
                     </div>
+                    {% endif %}
+                    {% endfor %}
                 </div>
                 <div class="col-lg-6">
                     <div class="about__right__text">

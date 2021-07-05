@@ -30,9 +30,6 @@ class AboutPage(models.Model):
     def __str__(self):
         return self.name
 
-    def get_images(self):
-        return self.about_images.all()
-
 
 class AboutImage(models.Model):
     image = models.ImageField(upload_to='about/')

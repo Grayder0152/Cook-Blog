@@ -1,5 +1,6 @@
-{% load static about_me_tags %}
+{% load static about_me_tags cache %}
 
+{% cache 36000 footer %}
 <footer class="footer">
     <div class="container-fluid">
         <div class="footer__instagram">
@@ -58,3 +59,4 @@
         </div>
     </div>
 </footer>
+{% endcache %}

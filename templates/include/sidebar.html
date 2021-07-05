@@ -1,5 +1,6 @@
-{% load static menu_tags about_me_tags %}
+{% load static menu_tags about_me_tags cache %}
 
+{% cache 3600 sidebar %}
 <div class="sidebar__item">
     <div class="sidebar__about__item">
         {% get_about %}
@@ -32,3 +33,4 @@
         {% include 'include/email_subscribe.html' %}
     </div>
 </div>
+{% endcache %}

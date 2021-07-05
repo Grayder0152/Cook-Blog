@@ -1,4 +1,6 @@
-{% load email_subscribe_tag %}
+{% load email_subscribe_tag cache %}
+
+{% cache 36000 email_subscribe %}
 {% get_email_subscribe_form as form %}
 <p>Subscribe to our newsletter and get our newest updates right on your inbox.</p>
 <form action="{% url 'email_subscribe' %}" method="post">
@@ -11,3 +13,4 @@
     </label>
     <button type="submit" class="site-btn">Subscribe</button>
 </form>
+{% endcache %}

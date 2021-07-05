@@ -1,4 +1,7 @@
-{% load static menu_tags about_me_tags %}
+{% load static menu_tags about_me_tags cache %}
+
+
+{% cache 3600 left_nav %}
 
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
@@ -38,3 +41,4 @@
         {% include 'include/email_subscribe.html' %}
     </div>
 </div>
+{% endcache %}
