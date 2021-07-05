@@ -81,7 +81,7 @@
                                 <li>by <span>{{ first_post.author }}</span></li>
                                 <li>{{ first_post.comment.count }} Comment</li>
                             </ul>
-                            <p>{{ first_post.mini_text|truncatewords:30 }}</p>
+                            <p>{{ first_post.mini_text|truncatewords_html:30|safe }}</p>
                             <a href="{{ first_post.get_absolute_url }}" class="primary-btn">Read more</a>
                         </div>
                         {% endwith %}
@@ -116,7 +116,7 @@
                                             <li>by <span>{{ post.author }}</span></li>
                                             <li>{{ post.comment.count }} Comment</li>
                                         </ul>
-                                        <p>{{ post.mini_text|truncatewords:30 }}</p>
+                                        <p>{{ post.mini_text|truncatewords_html:30|safe }}</p>
                                     </div>
                                 </div>
                             </div>

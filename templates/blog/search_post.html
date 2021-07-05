@@ -34,7 +34,7 @@
                                             <li>by <span>{{ post.author }}</span></li>
                                             <li>{{ post.comment.count }} Comment</li>
                                         </ul>
-                                        {{ post.mini_text|truncatewords:30 }}
+                                        {{ post.mini_text|truncatewords_html:30|safe }}
                                     </div>
                                 </div>
                             </div>
